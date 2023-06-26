@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Menu Animation</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #fffbd5;
+      background: -webkit-linear-gradient(to right,
+          #b20a2c,
+          #fffbd5);
+      background: linear-gradient(to right,
+          #b20a2c,
+          #fffbd5);
+    }
+    .container {
+      width: 15rem;
+      height: 5rem;
+      position: relative;
+      margin: 50px auto;
+      transform: rotate(0deg);
+      transition: 0.5s ease-in-out;
+      cursor: pointer;
+    }
+    .container span {
+      display: block;
+      position: absolute;
+      height: 1.5rem;
+      width: 100%;
+      background: #c31432;
+      background: -webkit-linear-gradient(to right,
+          #240b36,
+          #c31432);
+      background: linear-gradient(to right,
+          #240b36,
+          #c31432);
+      border-radius: 10px;
+      opacity: 1;
+      left: 0;
+      transform: rotate(0deg);
+      transition: 0.25s ease-in-out;
+    }
+
+    .container span:nth-child(1) {
+      top: 0px;
+    }
+    .container span:nth-child(2),
+    .container span:nth-child(3) {
+      top: 40px;
+    }
+    .container span:nth-child(4) {
+      top: 80px;
+    }
+    .container.open span:nth-child(1) {
+      top: 20px;
+      width: 0%;
+      left: 50%;
+    }
+    .container.open span:nth-child(2) {
+      transform: rotate(45deg);
+    }
+    .container.open span:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+    .container.open span:nth-child(4) {
+      top: 20px;
+      width: 0%;
+      left: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <script>
+    const container = document.querySelector(".container");
+    container.addEventListener("click", () => container.classList.toggle("open"));
+  </script>
+</body>
+
+</html>

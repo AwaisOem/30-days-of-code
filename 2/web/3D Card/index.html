@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3D Card</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      zoom: 0.95;
+    }
+    
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      perspective: 1000px;
+      font-family: "Ubuntu", sans-serif;
+    }
+    
+    .cardContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
+    }
+
+    .card {
+      transform-style: preserve-3d;
+      min-height: 90vh;
+      width: 35rem;
+      border-radius: 30px;
+      padding: 0rem 5rem;
+      box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .shoe {
+      min-height: 35vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .shoe img {
+      width: 20rem;
+      z-index: 2;
+      transition: all 0.75s ease-out;
+    }
+
+    .circle {
+      width: 15rem;
+      height: 15rem;
+      background: linear-gradient(to right,
+      rgba(245, 70, 66, 0.75),
+      rgba(8, 83, 156, 0.75));
+      position: absolute;
+      z-index: 1;
+      border-radius: 50%;
+    }
+    .content{
+      padding: 40px 0;
+      display: flex;
+      flex-flow: column nowrap;
+      gap:40px;
+      justify-content: space-between;
+
+    }
+    .content h1 {
+      font-size: 3rem;
+      transition: all 0.75s ease-out;
+    }
+
+    .content h3 {
+      font-size: 1.3rem;
+      color: #585858;
+      font-weight: lighter;
+      transition: all 0.75s ease-out;
+    }
+    
+    .shoeSizes {
+      display: flex;
+      justify-content: space-between;
+      transition: all 0.75s ease-out;
+    }
+
+    .shoeSizes button {
+      padding: 0.5rem 2rem;
+      background: none;
+      border: none;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      color: #585858;
+      font-family: "Ubuntu", sans-serif;
+    }
+
+    button.active {
+      background: #585858;
+      color: white;
+    }
+
+    .addToCart {
+      padding-bottom: 2rem;
+      transition: all 0.75s ease-out;
+      font-family: "Ubuntu", sans-serif;
+    }
+    
+    .addToCart button {
+      font-size: 1.5rem;
+      width: 100%;
+      padding: 2rem 0rem;
+      background: #f54642;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 1rem;
+      font-weight: bolder;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cardContainer">
+    <div class="card">
+      <div class="shoe">
+        <div class="circle"></div>
+        <img src="./nike-shoes-transparent.png" alt="Nike" />
+      </div>
+      <div class="content">
+        <h1 class="header">Nike Air Zoom Pegasus 37</h1>
+        <h3>
+          Reinvigorate your stride and find your wings with the Nike Air Zoom
+          Pegasus 37.
+        </h3>
+        <div class="shoeSizes">
+          <button class="active">39</button>
+          <button>40</button>
+          <button >42</button>
+          <button>44</button>
+        </div>
+        <div class="addToCart">
+          <button>Add To Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const card = document.querySelector(".card");
+    const cardContainer = document.querySelector(".cardContainer");
+    const header = document.querySelector(".header");
+    const shoe = document.querySelector(".shoe img");
+    const addToCart = document.querySelector(".addToCart");
+    const description = document.querySelector(".content h3");
+    const shoeSizes = document.querySelector(".shoeSizes");
+
+
+    cardContainer.addEventListener("mousemove", (e) => {
+      let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+      let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+      card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+    cardContainer.addEventListener("mouseenter", (e) => {
+      card.style.transition = "none";
+      header.style.transform = "translateZ(150px)";
+      shoe.style.transform = "translateZ(200px) rotateZ(-45deg)";
+      description.style.transform = "translateZ(125px)";
+      shoeSizes.style.transform = "translateZ(100px)";
+      addToCart.style.transform = "translateZ(75px)";
+    });
+    cardContainer.addEventListener("mouseleave", (e) => {
+      card.style.transition = "all 0.5s ease";
+      card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+      header.style.transform = "translateZ(0px)";
+      shoe.style.transform = "translateZ(0px) rotateZ(0deg)";
+      description.style.transform = "translateZ(0px)";
+      shoeSizes.style.transform = "translateZ(0px)";
+      addToCart.style.transform = "translateZ(0px)";
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap");
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      overflow: hidden;
+      font-family: "Cinzel Decorative", cursive;
+    }
+    :root{
+      --color :#7f55f1;
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width:100vw;
+      background: floralwhite;
+    }
+
+      .box {
+      position: absolute;
+      max-width: 500px;
+      width: 90vw;
+      height: 90vw;
+      max-height: 500px;
+    }
+
+    .container .box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      height: 100%;
+      width: 100%;
+      opacity: 0.1;
+      transform: rotate(45deg);
+      transform-origin: left;
+    }
+
+    .box .circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      z-index: 1;
+      background: linear-gradient(135deg, #fff, floralwhite);
+      box-shadow: 20px 20px 60px #c1c2c5, -20px -20px 60px #ffffff;
+    }
+
+    .container .box .circle::before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      bottom: 5px;
+      right: 5px;
+      border-radius: 50%;
+    }
+
+    .container .box .circle h1 {
+      z-index: 2;
+      font-size: 5rem;
+      position: absolute;
+      color: var(--color);
+      text-align: center;
+    }
+    /* #f40009 */
+    .container i {
+      position: absolute;
+      background:  var(--color);
+      border-radius: 100%;
+      animation: animate linear infinite;
+    }
+    .container i:nth-child(even) {
+      background: transparent;
+      border: 1px solid #000000;
+    }
+    @keyframes animate {
+      0% {
+        opacity: 0;
+        transform: translateY(0);
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-2000%);
+      }
+    }
+    #info{
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      width: 180px;
+      height: 50px;
+      color : white;
+      font-weight: bold;
+      user-select: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+
+      background-color: var(--color);
+    }
+    #model{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width:350px;
+      height:400px;
+      border-radius:10px;
+      color: white;
+      padding : 30px;
+      
+      font-size: small;
+      font-family: Arial, Helvetica, sans-serif;
+      z-index: 30;
+      background-color: var(--color);
+      transform: translate(-50%,-50%);
+    }
+    #model ol{
+      display: flex;
+      gap:4px;
+      flex-direction: column;
+    }
+    .hidden{
+      display : none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="box">
+      <div class="circle">
+        <h1 id ="txt">Stay<br />Blessed</h1>
+      </div>
+    </div>
+  </div>
+  <div id="info">Wanna Try?</div>
+  <div id="model" class="hidden">
+    <ol>
+      <li>add your message in the end of url</li>
+      <li>format is <br> ?text=YourMessage&color=ffffff </li>
+      <li>for space use %20 in string and for next line %40</li>
+      <li>Example: <br/>?text=I%20am%20Coming%40Mars&color=7f55f1 </li>
+      <li>color is in hexadecimal like #7f55f1 don't write '#'</li>
+      <li>you are smart enough now to figure it out</li>
+      <li>Now Take the url and Short it using url shortner</li>
+      <li>Surprise Your friends</li>
+    </ol>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      document.querySelector('#info').addEventListener('click',()=>{
+        const model = document.getElementById('model');
+        if(model.className == 'hidden'){
+          model.className = "";
+        }else{
+          model.className = "hidden";
+        }
+      })
+      var container = document.querySelector(".container");
+      for (let i = 0; i < 1000; i++) {
+        var singleParticle = document.createElement("i");
+        var x = Math.floor(Math.random() * window.innerWidth);
+        var y = Math.floor(Math.random() * window.innerHeight);
+        var size = Math.random() * 10;
+        singleParticle.style.left = x + "px";
+        singleParticle.style.top = y + "px";
+        singleParticle.style.width = 1 + size + "px";
+        singleParticle.style.height = 1 + size + "px";
+        singleParticle.style.animationDuration = 5 + size + "s";
+        singleParticle.style.animationDelay = -size + "s";
+        container.appendChild(singleParticle);
+      }
+      let arr = location.search || "";
+      if(arr!==''){
+        arr = arr.replace('?','').split('&').map(e=>e.split('='));
+        arr[0][1] = arr[0][1].replaceAll('%20',' ').replaceAll('%40','<br/>');
+        document.title  =document.getElementById("txt").innerHTML = arr[0][1];
+        if(arr.length > 1){
+          document.documentElement.style.setProperty(`--color` , `#${arr[1][1]}`);
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>
