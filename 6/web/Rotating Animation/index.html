@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Animation</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./style.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #8400ff;
+    }
+    .squares {
+      border: 60px solid #00d9ff;
+      position: absolute;
+      transform: translate(-50%, -50%) rotate(0deg);
+      animation: 10s ease-in-out infinite;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+    <div class="squares"></div>
+  </div>
+  <script async defer>
+    const squares = document.querySelectorAll(".squares");
+    squares.forEach((square, index) => {
+      //   increasing the width of the border
+      square.style.borderWidth = (index + 1) * 4 + "px";
+      //   adding animation to all the squares
+      square.style.animationName = `rotate-${index}`;
+
+      const degree = (index + 1) * 360 * 2;
+
+      const animation = document.createElement("style");
+      //   styling the newly made animation to all the squares
+      animation.innerHTML = `@keyframes rotate-${index} {
+        to {
+            transform: translate(-50%,-50%) rotate(${degree}deg);
+            border-radius: 50%;
+            opacity:0.1;
+            border: 60px solid #00d9ff;
+        }
+    }`;
+      document.body.appendChild(animation);
+    });
+
+  </script>
+</body>
+
+</html>

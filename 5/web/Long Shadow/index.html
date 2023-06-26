@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Long Shadow</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./style.css" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Lexend+Mega&display=swap");
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      align-items: center;
+      background: #fdf8f5;
+      font-family: "Lexend Mega", sans-serif;
+    }
+
+    .content {
+      color: #4f4846;
+      font-weight: 700;
+      font-size: 6rem;
+      width: 100%;
+      text-align: center;
+      text-shadow: 1px 1px 0 #83cfcb;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <span class="content" contenteditable="">Write✍</span>
+  <script async defer>
+    var content = document.querySelector(".content");
+    var longS = "";
+    let i = 0;
+  let ani = setInterval(() => {
+    longS += (longS ? "," : "") + i + "px " + (i++) + "px 0 #83cfcb";
+    content.style.textShadow = longS;
+  }, 10)
+  setTimeout(() => {
+    clearInterval(ani);
+  }, 2000)
+</script>
+</body>
+
+</html>

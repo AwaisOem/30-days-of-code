@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Robbery</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./style.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+      /*   adding png image to make cursor more creative */
+      cursor: url(thief.png), pointer;
+    }
+    .needle {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <script async defer>
+    document.querySelector('body').innerHTML = ('<img src="./police-officer-toronto-police-service-clip-art.png" alt="" class="needle" />'.repeat(15))
+    // giving random size to the police officers
+    function randomSize(min, max) {
+      min = Math.ceil(40);
+      max = Math.ceil(150);
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+    // rotating needle where the mouse moves
+    function rotateNeedle() {
+      needle.forEach(function (needle) {
+        let x = needle.getBoundingClientRect().left + needle.clientWidth / 2;
+        let y = needle.getBoundingClientRect().top + needle.clientHeight / 2;
+    
+        let radian = Math.atan2(event.pageX - x, event.pageY - y);
+        let rot = radian * (180 / Math.PI) * -1 + 270;
+        needle.style.transform = "rotate(" + rot + "deg)";
+      });
+    }
+    document.querySelector("body").addEventListener("mousemove", rotateNeedle);
+    let needle = document.querySelectorAll(".needle");
+    for (let i = 0; i < needle.length; i++) {
+      needle[i].style.left = Math.floor(Math.random() * 99) + "vw";
+      needle[i].style.top = Math.floor(Math.random() * 99) + "vh";
+      needle[i].style.width = randomSize() + "px";
+    }
+
+  </script>
+</body>
+</html>
